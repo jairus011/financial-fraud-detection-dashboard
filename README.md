@@ -314,9 +314,12 @@ not required; these `.joblib` bundles are the saved models.
 - `python -m pip check` reports no broken requirements.
 - Screenshot capture remains limited by the isolated browser preview connection.
 
-Read [verification.json](outputs/verification.json) for the recorded status. The GitHub
-workflow supplies repeatable checks after publishing; a workflow configuration is not itself
-evidence of a completed remote CI run.
+Read [verification.json](outputs/verification.json) for the recorded status.
+The [GitHub Actions validation run](https://github.com/jairus011/financial-fraud-detection-dashboard/actions/runs/35002256087)
+**passed** on the uploaded project: clean dependency installation, automated tests, real
+Streamlit launch, full output rebuild and notebook execution. All 59 published files were
+verified against the local Git blob hashes, and the repository was opened in a browser.
+The repository is private; assessors need repository access to review it.
 
 ## Limitations and future enhancements
 

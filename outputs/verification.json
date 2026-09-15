@@ -39,7 +39,27 @@
     "blocker": "Browser cannot access isolated local server; ERR_BLOCKED_BY_CLIENT. Report figures are not screenshots."
   },
   "github_publication": {
-    "verified": false,
-    "status": "Pending repository creation and publishing; no remote CI run claimed."
+    "verified": true,
+    "repository_url": "https://github.com/jairus011/financial-fraud-detection-dashboard",
+    "visibility": "private",
+    "branch": "main",
+    "validated_project_commit": "47349139d752de6aa5ed99758446575482cc0c2e",
+    "validated_project_tree": "854b344e2ebc042810052c8001e826a32ddd3c98",
+    "files_verified_against_local_git_blobs": 59,
+    "browser_repository_open_verified": true,
+    "publication_method": "GitHub Git Data API: blobs, trees, commits and fast-forward main ref updates",
+    "native_git_push": "No local GitHub credentials; publication completed through the authenticated GitHub connector."
+  },
+  "github_actions": {
+    "conclusion": "success",
+    "run_url": "https://github.com/jairus011/financial-fraud-detection-dashboard/actions/runs/35002256087",
+    "commit": "47349139d752de6aa5ed99758446575482cc0c2e",
+    "checks": [
+      "Fresh Python 3.12 dependency installation",
+      "26 automated tests",
+      "Real Streamlit HTTP launch",
+      "Empty-output-folder full model rebuild",
+      "Complete notebook execution"
+    ]
   }
 }
