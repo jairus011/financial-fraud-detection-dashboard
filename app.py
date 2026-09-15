@@ -16,7 +16,7 @@ from src.predict import PRODUCTION_INPUTS, load_artifacts, score_transactions
 
 st.set_page_config(page_title="Zidio | Financial Fraud Intelligence", page_icon="◈", layout="wide")
 st.markdown("""<style>
-.block-container {padding-top:2rem; padding-bottom:2rem; max-width:1550px;}
+.block-container {padding-top:3.75rem; padding-bottom:2rem; max-width:1550px;}
 h1 {font-size:2.25rem !important; letter-spacing:-.06rem;}
 h2 {font-size:1.35rem !important;} h3 {font-size:1.1rem !important;}
 [data-testid="stMetric"] {background:#fff; border:1px solid #dee7ed; border-radius:12px; padding:16px 20px;}
