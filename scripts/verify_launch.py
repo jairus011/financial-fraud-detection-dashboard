@@ -1,5 +1,6 @@
 """Start a real Streamlit server, check HTTP health, and stop the test server."""
 import http.client
+import os
 from pathlib import Path
 import socket
 import subprocess
@@ -12,8 +13,9 @@ with socket.socket() as probe:
     probe.bind(("127.0.0.1", 0))
     port = probe.getsockname()[1]
 with tempfile.TemporaryFile(mode="w+") as log:
-    process = subprocess.Popen([sys.executable, "-m", "streamlit", "run", "app.py", "--server.headless=true",
-                                "--server.address=127.0.0.1", f"--server.port={port}"], cwd=ROOT, stdout=log, stderr=subprocess.STDOUT)
+    process = subprocess.Popen([sys.executable, "scripts/start_dashboard.py"], cwd=ROOT,
+                                env={**os.environ, "PORT": str(port)},
+                                stdout=log, stderr=subprocess.STDOUT)
     try:
         deadline = time.monotonic() + 40
         healthy = False
@@ -33,7 +35,7 @@ with tempfile.TemporaryFile(mode="w+") as log:
         if not healthy:
             log.seek(0)
             raise RuntimeError("Streamlit did not become healthy.\n" + log.read())
-        print("PASS: Streamlit launched and /_stcore/health returned HTTP 200 / ok.")
+        print("PASS: Hosted startup respected PORT and /_stcore/health returned HTTP 200 / ok.")
     finally:
         process.terminate()
         try:

@@ -55,6 +55,14 @@ command, with the project environment active, is:
 python -m streamlit run app.py
 ```
 
+### Online hosting
+
+The app is prepared for a Render Free web service using Python 3.12 and
+`python scripts/start_dashboard.py`. It uses the host's `PORT` and the committed
+model artifacts. See [deployment settings](docs/deployment.md) for the exact build
+command, hosting behavior and final live-verification steps. A live URL will be
+added after the deployment succeeds.
+
 ### Rebuild and verify everything
 
 Use the same environment's Python executable for these commands:
@@ -284,6 +292,7 @@ its current filtered view. This is an offline batch demonstration, not Kafka/Spa
 | `requirements.txt` | Exact tested direct dependency versions |
 | `.gitignore` | Secrets, environments, caches and temporary files excluded |
 | `.streamlit/config.toml` | Dashboard theme and local server defaults |
+| `.python-version` | Python 3.12 selection for hosting |
 | `src/` | Data audit/ETL, feature pipeline, model training, evaluation, prediction, alerts and figures |
 | `data/raw/` | Only the supplied final CSV |
 | `data/processed/` | Clean CSV and indexed SQLite database |

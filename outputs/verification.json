@@ -61,5 +61,17 @@
       "Empty-output-folder full model rebuild",
       "Complete notebook execution"
     ]
+  },
+  "hosting_preparation": {
+    "provider": "Render",
+    "python_version": "3.12",
+    "build_command": "python -m pip install -r requirements.txt",
+    "start_command": "python scripts/start_dashboard.py",
+    "hosted_startup_http_check_passed": true,
+    "port_environment_variable_verified": true,
+    "automated_tests_passed": 26,
+    "dependency_check_passed": true,
+    "live_deployment_verified": false,
+    "status": "Prepared; waiting for explicit workspace confirmation before service creation."
   }
 }
