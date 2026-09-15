@@ -1,0 +1,45 @@
+{
+  "automated_tests": {
+    "passed": 26,
+    "failed": 0,
+    "command": "python -m pytest"
+  },
+  "fresh_output_rebuild": {
+    "passed": true,
+    "command": "python scripts/verify_fresh_run.py",
+    "scope": "Empty output directory; full ETL, training, metrics, model serialization, predictions and figures reproduce."
+  },
+  "notebook": {
+    "code_cells_executed": 13,
+    "cell_errors": 0,
+    "backend": "Fresh-process IPython, no networked kernel",
+    "command": "python scripts/execute_notebook.py"
+  },
+  "streamlit_launch": {
+    "passed": true,
+    "health_http_status": 200,
+    "health_body": "ok",
+    "command": "python scripts/verify_launch.py"
+  },
+  "dependency_check": {
+    "passed": true,
+    "command": "python -m pip check"
+  },
+  "batch_prediction_cli": {
+    "passed": true,
+    "rows_scored": 8
+  },
+  "fraud_alert_cli": {
+    "passed": true,
+    "simulated_alerts": 25,
+    "external_messages_sent": 0
+  },
+  "dashboard_screenshots": {
+    "captured": false,
+    "blocker": "Browser cannot access isolated local server; ERR_BLOCKED_BY_CLIENT. Report figures are not screenshots."
+  },
+  "github_publication": {
+    "verified": false,
+    "status": "Pending repository creation and publishing; no remote CI run claimed."
+  }
+}

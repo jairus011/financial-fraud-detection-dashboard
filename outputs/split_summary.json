@@ -1,0 +1,32 @@
+{
+  "train": {
+    "rows": 3000,
+    "frauds": 286,
+    "fraud_rate": 0.09533333333333334,
+    "start": "2023-01-01 02:16:00",
+    "end": "2023-09-11 02:42:00",
+    "unique_customers": 2529
+  },
+  "validation": {
+    "rows": 1000,
+    "frauds": 108,
+    "fraud_rate": 0.108,
+    "start": "2023-09-11 05:17:00",
+    "end": "2023-11-29 01:11:00",
+    "unique_customers": 944
+  },
+  "test": {
+    "rows": 1000,
+    "frauds": 88,
+    "fraud_rate": 0.088,
+    "start": "2023-11-29 03:08:00",
+    "end": "2024-02-21 15:34:00",
+    "unique_customers": 946
+  },
+  "customer_overlap": {
+    "train_validation": 269,
+    "train_test": 244,
+    "validation_test": 83
+  },
+  "policy": "Chronological 60/20/20; identical timestamps not split; returning customers permitted, IDs excluded."
+}

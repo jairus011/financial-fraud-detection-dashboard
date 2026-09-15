@@ -1,0 +1,4 @@
+variant,validation_ap
+Final: transaction-time fields only,0.3946805450491883
+Add unverified history (diagnostic only),0.374358258555354
+Add suspicious keyword (diagnostic only),0.469561315046745
