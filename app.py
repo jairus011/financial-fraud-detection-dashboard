@@ -173,10 +173,10 @@ elif page == "Transaction Patterns":
     with left:
         st.subheader("Activity and amount")
         measure = st.selectbox("Trend measure", ["Transactions", "Amount"])
-        chart(px.line(trend, x="Transaction_Date", y=measure, markers=True))
+        chart(px.line(trend, x="Transaction_Date", y=measure, markers=True, render_mode="svg"))
     with right:
         st.subheader("Observed fraud rate over time")
-        chart(px.line(trend, x="Transaction_Date", y="Fraud rate (%)", markers=True, color_discrete_sequence=["#D56552"], hover_data=["Transactions", "Frauds"]))
+        chart(px.line(trend, x="Transaction_Date", y="Fraud rate (%)", markers=True, render_mode="svg", color_discrete_sequence=["#D56552"], hover_data=["Transactions", "Frauds"]))
     st.caption("Boundary periods may be partial; periods with no transactions have no fraud rate.")
     st.subheader("Hour and weekday activity")
     heat = filtered.assign(Hour=filtered.Transaction_Date.dt.hour, Weekday=filtered.Transaction_Date.dt.dayofweek).pivot_table(index="Weekday", columns="Hour", values="Transaction_ID", aggfunc="count", fill_value=0).reindex(index=range(7), columns=range(24), fill_value=0)
@@ -190,7 +190,7 @@ elif page == "Risk/Anomaly Analysis":
     left, right = st.columns(2)
     with left:
         st.subheader("Supervised score vs anomaly score")
-        chart(px.scatter(filtered, x="Anomaly_Score", y="Fraud_Score", color="Actual label", color_discrete_map=COLORS,
+        chart(px.scatter(filtered, x="Anomaly_Score", y="Fraud_Score", color="Actual label", color_discrete_map=COLORS, render_mode="svg",
                          opacity=.55, hover_data=["Transaction_ID", "Transaction_Amount", "Split"]))
     with right:
         st.subheader("Anomaly score distribution")
@@ -203,10 +203,10 @@ elif page == "Risk/Anomaly Analysis":
     if st.button("Simulate high-risk alerts", type="primary"):
         alerts = simulate_alerts(filtered, limit=25)
         st.success(f"Simulated {len(alerts)} review alerts. No email or external messages were sent.")
-        st.download_button("Download simulated alerts", "\n".join(json.dumps(a) for a in alerts), file_name="simulated_fraud_alerts.jsonl", mime="application/x-ndjson")
+        st.download_button("Download simulated alerts", "\n".join(json.dumps(a) for a in alerts), file_name="simulated_fraud_alerts.jsonl", mime="application/x-ndjson", on_click="ignore")
         if alerts:
             st.json(alerts[0])
-    st.download_button("Download filtered scored transactions", filtered.to_csv(index=False), file_name="filtered_scored_transactions.csv", mime="text/csv")
+    st.download_button("Download filtered scored transactions", filtered.to_csv(index=False), file_name="filtered_scored_transactions.csv", mime="text/csv", on_click="ignore")
 
 elif page == "Model Performance":
     st.markdown(f"**Selected model: {performance['final_model']}**")
@@ -234,7 +234,7 @@ elif page == "Model Performance":
     for col, kind in zip(st.columns(2), ["ROC", "PR"]):
         with col:
             selected_curves = curves.loc[curves.model.isin(choices) & curves.curve.eq(kind)]
-            figure = px.line(selected_curves, x="x", y="y", color="model", labels={"x": "False-positive rate" if kind == "ROC" else "Recall", "y": "Recall" if kind == "ROC" else "Precision"}, title=kind)
+            figure = px.line(selected_curves, x="x", y="y", color="model", render_mode="svg", labels={"x": "False-positive rate" if kind == "ROC" else "Recall", "y": "Recall" if kind == "ROC" else "Precision"}, title=kind)
             if kind == "ROC":
                 figure.add_shape(type="line", x0=0, y0=0, x1=1, y1=1, line=dict(dash="dash", color="#99A5AC"))
             else:
@@ -293,10 +293,10 @@ elif page == "Transaction Prediction":
                 st.warning("Unusual transaction: the anomaly detector suggests a review.")
             else:
                 st.success("Below the configured review cutoffs. A lower score does not guarantee a legitimate transaction.")
-            st.download_button("Download prediction", pd.DataFrame([prediction]).to_csv(index=False), file_name="transaction_prediction.csv", mime="text/csv")
+            st.download_button("Download prediction", pd.DataFrame([prediction]).to_csv(index=False), file_name="transaction_prediction.csv", mime="text/csv", on_click="ignore")
     with batch:
         st.write("Upload a CSV with the seven columns shown in the template. Blank numeric/categorical cells use training-fitted imputation; invalid dates or values receive a clear error.")
-        st.download_button("Download input template", (ROOT / "data/prediction_example.csv").read_bytes(), file_name="prediction_example.csv", mime="text/csv")
+        st.download_button("Download input template", (ROOT / "data/prediction_example.csv").read_bytes(), file_name="prediction_example.csv", mime="text/csv", on_click="ignore")
         upload = st.file_uploader("Transaction CSV", type="csv")
         if upload is not None:
             try:
@@ -306,7 +306,7 @@ elif page == "Transaction Prediction":
                 scored_upload = score_transactions(incoming, model, anomaly_model)
                 st.success(f"Scored {len(scored_upload):,} transactions using the saved model.")
                 st.dataframe(scored_upload.head(100), hide_index=True, width="stretch")
-                st.download_button("Download scored CSV", scored_upload.to_csv(index=False), file_name="scored_upload.csv", mime="text/csv")
+                st.download_button("Download scored CSV", scored_upload.to_csv(index=False), file_name="scored_upload.csv", mime="text/csv", on_click="ignore")
             except (ValueError, KeyError, pd.errors.ParserError, UnicodeDecodeError) as exc:
                 st.error(str(exc))
 
