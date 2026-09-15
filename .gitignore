@@ -1,0 +1,36 @@
+# Credentials and local configuration
+.env
+.env.*
+!.env.example
+secrets.toml
+credentials*.json
+*.pem
+*.key
+.streamlit/secrets.toml
+# Environments, caches, and temporary artifacts
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+*.egg-info/
+build/
+dist/
+*.log
+*.tmp
+*.sqlite-journal
+*.sqlite-wal
+*.sqlite-shm
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+fresh_run/
+outputs/batch_predictions.csv
+outputs/replay_alerts.jsonl
+# Trained artifacts, final notebook, small supplied dataset, and report outputs
+# are deliberately versioned for an immediately runnable submission.
