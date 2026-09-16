@@ -1,9 +1,12 @@
 # Online dashboard deployment
 
-The project is prepared for one Render web service. A Streamlit Community Cloud
-account is not needed when the Streamlit application runs on Render.
+The Streamlit dashboard is deployed as a Render web service and is publicly accessible at:
 
-## Prepared service settings
+**https://financial-fraud-detection-dashboard.onrender.com/**
+
+A Streamlit Community Cloud account is not required because the application runs directly on Render.
+
+## Verified service settings
 
 | Setting | Value |
 |---|---|
@@ -19,42 +22,47 @@ account is not needed when the Streamlit application runs on Render.
 | Health endpoint | `/_stcore/health` |
 | Required secrets | None |
 
-The startup script binds to `0.0.0.0` and the host-provided `PORT`, disables file
-watching, and uses the same committed model pipelines as the local dashboard.
-The deployment loads saved artifacts; it does not retrain models on server startup.
-Use `python scripts/verify_launch.py` to check this startup path locally.
+The startup script binds to `0.0.0.0` and Render's host-provided `PORT`, disables file
+watching, and uses the same committed model pipelines as the local dashboard. The deployment
+loads saved artifacts and does not retrain models on server startup.
+
+## Deployment verification
+
+Render reports the latest deployment as live. The service build completed successfully,
+`python scripts/start_dashboard.py` launched Streamlit, and Render detected the web process on
+port 10000 before publishing the primary URL above.
+
+The repository is public, so assessors can inspect the code and open the hosted dashboard
+without being added as collaborators.
 
 ## Access and data
 
-The proposed web service is a publicly accessible educational demonstration. It
-displays the supplied historical transaction dataset and allows users to download
-scored rows. The source repository can remain private, provided Render's GitHub
-connection has access to this repository. Uploaded CSVs are processed in the user's
-app session and returned as downloads; the application does not save them to a
-shared database or send email alerts.
+The service is a publicly accessible educational demonstration. It displays the supplied
+historical transaction dataset and allows users to download scored rows. Uploaded CSVs are
+processed during the user's app session and returned as downloads; the application does not
+persist those uploads to a shared database or send real external fraud alerts.
 
-SQLite is a committed, reproducible local ETL artifact. No extra hosted database
-or persistent disk is needed for this read-only historical demonstration.
+SQLite remains a committed, reproducible local ETL artifact. No extra hosted database or
+persistent disk is required for this read-only historical demonstration.
 
 ## Free hosting behavior
 
-Render's Free services sleep after 15 minutes without traffic and may take about
-a minute to wake on the next visit. Open the app before a presentation. Workspace
-usage limits still apply. The filesystem is ephemeral; changes made by a running
-service are lost on restart or redeploy. See [Render's Free service documentation](https://render.com/docs/free).
+Render Free services may sleep after a period without traffic and can take time to wake on the
+next visit. Open the app shortly before a presentation. The filesystem is ephemeral; changes
+made by a running service are lost when the instance restarts or redeploys.
 
-## Final deployment verification
+## Remaining presentation task
 
-After the workspace is confirmed and the service is created:
+The only deployment-related presentation item still outstanding is the capture of genuine
+browser screenshots from the live dashboard. Capture and save:
 
-1. Confirm Render reports a live deploy and the health endpoint returns `200 / ok`.
-2. Open all six pages and check the actual 5,000-row dataset KPIs and test metrics.
-3. Submit a prediction and exercise filters and the simulated alert download.
-4. Save genuine Executive Overview, Model Performance and Transaction Prediction
-   screenshots under `outputs/screenshots/`.
-5. Add the verified live URL and screenshot links to the README and project report.
+1. `executive_overview.png` - default full-dataset KPIs and charts.
+2. `model_performance.png` - selected model metrics and confusion matrix.
+3. `transaction_prediction.png` - a submitted example transaction with its returned scores.
 
-No live URL is claimed until these deployment checks have succeeded.
+Place them under `outputs/screenshots/` and embed them in the root README and final report.
+No generated chart should be represented as a dashboard screenshot.
 
 References: [Render Python versions](https://render.com/docs/python-version),
-[Render web services and port binding](https://render.com/docs/web-services).
+[Render web services and port binding](https://render.com/docs/web-services), and
+[Render Free service documentation](https://render.com/docs/free).
