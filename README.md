@@ -4,7 +4,8 @@ An original **Zidio data science project** by **Jairus Omondi**: reproducible SQ
 supervised fraud screening, Isolation Forest anomaly detection and a six-page Streamlit
 dashboard. Every result comes from the supplied final 5,000-row CSV.
 
-**Repository:** [jairus011/financial-fraud-detection-dashboard](https://github.com/jairus011/financial-fraud-detection-dashboard).
+**Repository:** [jairus011/financial-fraud-detection-dashboard](https://github.com/jairus011/financial-fraud-detection-dashboard)  
+**Live dashboard:** [financial-fraud-detection-dashboard.onrender.com](https://financial-fraud-detection-dashboard.onrender.com/)
 
 **Educational prototype for human review.** Model alerts are not confirmed fraud findings.
 The observed performance does not support automatic payment blocking or a production-readiness claim.
@@ -22,7 +23,7 @@ The observed performance does not support automatic payment blocking or a produc
 Use **Python 3.12** and run commands from this repository's root. The committed models and
 scored outputs let you open the dashboard immediately after installing requirements.
 
-Clone the repository using a GitHub account with access, or extract the supplied project ZIP:
+Clone the public repository or extract the supplied project ZIP:
 
 ```bash
 git clone https://github.com/jairus011/financial-fraud-detection-dashboard.git
@@ -56,11 +57,12 @@ python -m streamlit run app.py
 
 ### Online hosting
 
-The app is prepared for a Render Free web service using Python 3.12 and
-`python scripts/start_dashboard.py`. It uses the host's `PORT` and the committed
-model artifacts. See [deployment settings](docs/deployment.md) for the exact build
-command, hosting behavior and final live-verification steps. A live URL will be
-added after the deployment succeeds.
+The Streamlit dashboard is deployed on Render and is publicly accessible at
+[https://financial-fraud-detection-dashboard.onrender.com/](https://financial-fraud-detection-dashboard.onrender.com/).
+The service uses Python 3.12 and `python scripts/start_dashboard.py`, binds to Render's
+host-provided `PORT`, and loads the committed model artifacts rather than retraining on startup.
+Automatic deploys are enabled from the `main` branch. See [deployment settings](docs/deployment.md)
+for the exact build/start configuration and hosting notes.
 
 ### Rebuild and verify everything
 
@@ -256,15 +258,12 @@ calibrated probabilities. The dashboard never claims to be live fraud monitoring
 
 ### Dashboard screenshots
 
-The implementation environment passed all six Streamlit page tests and a real HTTP launch
-check, but its browser cannot access the isolated local server (`ERR_BLOCKED_BY_CLIENT`).
-Consequently, browser screenshots have **not** been claimed or fabricated. The images above
-are actual generated evaluation figures, not screenshots.
-
-To complete screenshot documentation on a machine that can open the dashboard, launch it
-and capture Executive Overview, Model Performance and a submitted Transaction Prediction.
-Save those captures under `outputs/screenshots/` and embed them here. The exact remaining
-capture status is documented in [outputs/screenshots/README.md](outputs/screenshots/README.md).
+The live Render deployment is verified and the six-page dashboard is publicly accessible.
+Genuine presentation screenshots have not yet been committed; no generated figure is presented
+as a browser screenshot. For final visual submission evidence, capture Executive Overview,
+Model Performance and a submitted Transaction Prediction from the live dashboard, save them
+under `outputs/screenshots/`, and embed them here. The capture checklist is documented in
+[outputs/screenshots/README.md](outputs/screenshots/README.md).
 
 ## Batch scoring, ETL and alert simulation
 
@@ -319,15 +318,16 @@ not required; these `.joblib` bundles are the saved models.
 - A complete empty-output-folder rebuild reproduces the selected model, metrics and saved scores.
 - All 13 notebook code cells execute in a fresh IPython process without errors.
 - A real Streamlit server launches and its health endpoint responds HTTP 200 / `ok`.
+- The Render service is live at the public dashboard URL above and auto-deploys from `main`.
 - `python -m pip check` reports no broken requirements.
-- Screenshot capture remains limited by the isolated browser preview connection.
+- Browser screenshot capture remains a presentation/documentation task.
 
 Read [verification.json](outputs/verification.json) for the recorded status.
 The [GitHub Actions validation run](https://github.com/jairus011/financial-fraud-detection-dashboard/actions/runs/35002256087)
 **passed** on the uploaded project: clean dependency installation, automated tests, real
 Streamlit launch, full output rebuild and notebook execution. All 59 published files were
 verified against the local Git blob hashes, and the repository was opened in a browser.
-The repository is private; assessors need repository access to review it.
+The repository is public and can be reviewed directly by assessors.
 
 ## Limitations and future enhancements
 
