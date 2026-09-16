@@ -4,8 +4,7 @@ An original **Zidio data science project** by **Jairus Omondi**: reproducible SQ
 supervised fraud screening, Isolation Forest anomaly detection and a six-page Streamlit
 dashboard. Every result comes from the supplied final 5,000-row CSV.
 
-**Repository:** [jairus011/financial-fraud-detection-dashboard](https://github.com/jairus011/financial-fraud-detection-dashboard)
-(private; repository access is required to clone or review it).
+**Repository:** [jairus011/financial-fraud-detection-dashboard](https://github.com/jairus011/financial-fraud-detection-dashboard).
 
 **Educational prototype for human review.** Model alerts are not confirmed fraud findings.
 The observed performance does not support automatic payment blocking or a production-readiness claim.
